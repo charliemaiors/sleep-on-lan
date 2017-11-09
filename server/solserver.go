@@ -75,6 +75,7 @@ func handleError(w http.ResponseWriter, err error, enc *json.Encoder, code int) 
 
 func stringInSlice(a string, list []string) bool {
 	for _, b := range list {
+		log.Debug("Current command is %s",b)
 		if b == a {
 			return true
 		}

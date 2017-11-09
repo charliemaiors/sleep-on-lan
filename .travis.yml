@@ -14,7 +14,6 @@ before_script:
 script:
 - go get -v ./...
 - GOOS="linux" go build -v -o bin/x86/sleeponlan cmd/sleeponlan.go
-- GOOS="darwin" go build -v -o bin/osx/sleeponlan cmd/sleeponlan.go
 - GOOS="windows" go build -v -o bin/win/sleeponlan.exe cmd/sleeponlan.go
 - GOOS="linux" GOARCH=arm go build -v -o bin/arm/sleeponlan cmd/sleeponlan.go
 

@@ -22,7 +22,7 @@ const (
 
 var (
 	shutdownFunc func(command string) error
-	options      = []string{"suspend", "poweroff", "hibernate", "sleep"}
+	options      = []string{"suspend", "poweroff", "hibernate", "reboot"}
 )
 
 func init() {

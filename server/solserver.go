@@ -9,7 +9,6 @@ import (
 	"runtime"
 
 	"github.com/julienschmidt/httprouter"
-	log "github.com/sirupsen/logrus"
 )
 
 type Result struct {
@@ -29,16 +28,13 @@ var (
 func init() {
 	switch runtime.GOOS {
 	case "windows":
-		log.Debug("Running on linux")
 		shutdownFunc = shutdownWindows
 	case "linux":
-		log.Debug("Running on linux")
 		fmt.Println("###############\nPlease be sure that this script has sudo priviledges in order to run commands from this script\n################")
 		shutdownFunc = shutdownLinux
 	default:
 		panic("Your os is not yet supported")
 	}
-	log.SetLevel(log.DebugLevel)
 }
 
 func Start() {
@@ -53,7 +49,7 @@ func Start() {
 
 func handleCommand(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	command := ps.ByName("command")
-	log.Debug("Command is %s", command)
+	fmt.Printf("Command is %s", command)
 	enc := json.NewEncoder(w)
 	if !stringInSlice(command, options) {
 		handleError(w, errors.New("Option not available"), enc, http.StatusMethodNotAllowed)
@@ -75,7 +71,7 @@ func handleError(w http.ResponseWriter, err error, enc *json.Encoder, code int) 
 
 func stringInSlice(a string, list []string) bool {
 	for _, b := range list {
-		log.Debug("Current command is %s",b)
+		fmt.Printf("Current command is %s", b)
 		if b == a {
 			return true
 		}

@@ -1,0 +1,33 @@
+sudo: required
+language: go
+os:
+- linux
+branches:
+  only:
+  - master
+  - "/^v\\d+(\\.\\d+)+$/"
+go:
+- 1.9
+
+before_script:
+- mkdir -p bin/x86 bin/osx bin/win bin/arm
+script:
+- go get -v ./...
+- GOOS="linux" go build -v -o bin/x86/sleeponlan cmd/sleeponlan.go
+- GOOS="darwin" go build -v -o bin/osx/sleeponlan cmd/sleeponlan.go
+- GOOS="windows" go build -v -o bin/win/sleeponlan.exe cmd/sleeponlan.go
+- GOOS="linux" GOARCH=arm go build -v -o bin/arm/sleeponlan cmd/sleeponlan.go
+
+before_deploy:
+- zip -r bin/sleeponlan-x86.zip bin/x86/
+- zip -r bin/sleeponlan-osx.zip bin/osx/
+- zip -r bin/sleeponlan-win.zip bin/win/
+- zip -r bin/sleeponlan-arm.zip bin/arm/
+deploy:
+  provider: releases
+  api_key: "$GITHUB_TOKEN"
+  file_glob: true
+  file: bin/*.zip
+  skip_cleanup: true
+  on:
+    tags: true

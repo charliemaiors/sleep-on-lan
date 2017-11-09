@@ -49,7 +49,7 @@ func Start() {
 
 func handleCommand(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	command := ps.ByName("command")
-	fmt.Printf("Command is %s", command)
+	fmt.Println("Command is " + command)
 	enc := json.NewEncoder(w)
 	if !stringInSlice(command, options) {
 		handleError(w, errors.New("Option not available"), enc, http.StatusMethodNotAllowed)
@@ -71,7 +71,7 @@ func handleError(w http.ResponseWriter, err error, enc *json.Encoder, code int) 
 
 func stringInSlice(a string, list []string) bool {
 	for _, b := range list {
-		fmt.Printf("Current command is %s", b)
+		fmt.Println("Current command is " + b)
 		if b == a {
 			return true
 		}

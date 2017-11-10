@@ -13,9 +13,9 @@ before_script:
 - mkdir -p bin/x86 bin/osx bin/win bin/arm
 script:
 - go get -v ./...
-- GOOS="linux" go build -v -o bin/x86/sleeponlan cmd/sleeponlan.go
-- GOOS="windows" go build -v -o bin/win/sleeponlan.exe cmd/sleeponlan.go
-- GOOS="linux" GOARCH=arm go build -v -o bin/arm/sleeponlan cmd/sleeponlan.go
+- GOOS="linux" go build -v -o bin/x86/sleeponlan main.go
+- GOOS="windows" go build -v -o bin/win/sleeponlan.exe main.go
+- GOOS="linux" GOARCH=arm go build -v -o bin/arm/sleeponlan main.go
 
 before_deploy:
 - zip -r bin/sleeponlan-x86.zip bin/x86/

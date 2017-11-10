@@ -8,6 +8,8 @@ import (
 	"os/exec"
 	"runtime"
 
+	ps "github.com/gorillalabs/go-powershell"
+	"github.com/gorillalabs/go-powershell/backend"
 	"github.com/julienschmidt/httprouter"
 )
 
@@ -22,6 +24,7 @@ const (
 
 var (
 	shutdownFunc func(command string) error
+	back         *backend.Local
 	options      = []string{"suspend", "poweroff", "hibernate", "reboot"}
 )
 
@@ -95,16 +98,21 @@ func shutdownLinux(command string) error {
 }
 
 func shutdownWindows(command string) error {
-	var commandEx *exec.Cmd
+	back = &backend.Local{}
+	shell, err := ps.New(back)
+	if err != nil {
+		return err
+	}
+
 	switch command {
 	case "suspend":
-		commandEx = exec.Command("rundll32", "powrprof.dll,SetSuspendState 0,1,0")
+		_, _, err = shell.Execute("rundll32 powrprof.dll,SetSuspendState 0,1,0")
 	case "poweroff":
-		commandEx = exec.Command(baseWindows, "-s")
+		_, _, err = shell.Execute(baseWindows + " -s")
 	case "hibernate":
-		commandEx = exec.Command(baseWindows, "-h")
+		_, _, err = shell.Execute(baseWindows + " -h")
 	case "reboot": //Really?
-		commandEx = exec.Command(baseWindows, "-r")
+		_, _, err = shell.Execute(baseWindows + " -r")
 	}
-	return commandEx.Run()
+	return err
 }

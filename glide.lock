@@ -1,0 +1,13 @@
+hash: 25c8278cfd423ef8c916f81d2d27cac2c8f2d64f4666eed7483c4ea11b986724
+updated: 2017-11-09T20:35:40.0517832+01:00
+imports:
+- name: github.com/gorillalabs/go-powershell
+  version: 8a975e1f46d292e02c8825f112090196bbc20ac1
+  subpackages:
+  - backend
+  - utils
+- name: github.com/juju/errors
+  version: c7d06af17c68cd34c835053720b21f6549d9b0ee
+- name: github.com/julienschmidt/httprouter
+  version: 8c199fb6259ffc1af525cc3ad52ee60ba8359669
+testImports: []

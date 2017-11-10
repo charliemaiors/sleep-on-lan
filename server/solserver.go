@@ -8,6 +8,8 @@ import (
 	"os/exec"
 	"runtime"
 
+	"github.com/spf13/viper"
+
 	ps "github.com/gorillalabs/go-powershell"
 	"github.com/gorillalabs/go-powershell/backend"
 	"github.com/julienschmidt/httprouter"
@@ -40,14 +42,14 @@ func init() {
 	}
 }
 
-func Start() {
+func StartServer() error {
+	port := viper.GetString("port")
 	router := httprouter.New()
 	router.POST("/:command", handleCommand)
-
-	err := http.ListenAndServe(":7740", router)
-	if err != nil {
-		panic(err)
-	}
+	fmt.Println("Port is " + port)
+	err := http.ListenAndServe(":"+port, router)
+	fmt.Println("Got error " + err.Error())
+	return err
 }
 
 func handleCommand(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {

@@ -34,7 +34,7 @@ var RootCmd = &cobra.Command{
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	Run: func(cmd *cobra.Command, args []string) {
-		server.Start()
+		server.StartServer()
 	},
 }
 
@@ -53,8 +53,7 @@ func init() {
 	// Here you will define your flags and configuration settings.
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
-	RootCmd.PersistentFlags().IntVar(&port, "port", 7740, "Server port, the default one is 7740")
-	RootCmd.PersistentFlags().Bool("install", false, "Install sleep on lan as service")
-	viper.BindPFlag("port", RootCmd.PersistentFlags().Lookup("port"))
-	viper.BindPFlag("install", RootCmd.PersistentFlags().Lookup("install"))
+	RootCmd.Flags().String("port", "7740", "Server port, the default one is 7740")
+	viper.BindPFlag("port", RootCmd.Flags().Lookup("port"))
+	viper.SetDefault("port", "7740")
 }

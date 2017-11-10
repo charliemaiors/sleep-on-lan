@@ -1,6 +1,5 @@
 # Sleep on Lan Service
---
-
+[![Build Status](https://travis-ci.org/charliemaiors/sleep-on-lan.svg?branch=master)](https://travis-ci.org/charliemaiors/sleep-on-lan)
 ## WARNING: Do not expose this service on public network
 This service allow to remotely turn off, restart, hibernate, sleep your computer inside your lan network.
 For example:

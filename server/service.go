@@ -44,9 +44,4 @@ func InstallService(port string) {
 	if err != nil {
 		logger.Error(err)
 	}
-
-	err = s.Start()
-	if err != nil {
-		logger.Error(err)
-	}
 }

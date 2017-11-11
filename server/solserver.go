@@ -42,14 +42,12 @@ func init() {
 	}
 }
 
-func StartServer() error {
+func StartServer() {
 	port := viper.GetString("port")
 	router := httprouter.New()
 	router.POST("/:command", handleCommand)
 	fmt.Println("Port is " + port)
-	err := http.ListenAndServe(":"+port, router)
-	fmt.Println("Got error " + err.Error())
-	return err
+	http.ListenAndServe(":"+port, router)
 }
 
 func handleCommand(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {

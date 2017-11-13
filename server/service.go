@@ -46,6 +46,7 @@ func InstallService(port string) {
 	}
 }
 
+//UninstallService uninstalls the service from target system
 func UninstallService() {
 	srvConf := &service.Config{
 		Name:        "sleeponlan",

@@ -18,6 +18,8 @@ script:
 - GOOS="linux" GOARCH=arm go build -v -o bin/arm/sleeponlan main.go
 
 before_deploy:
+- cp script/win-service-install.ps1 bin/win/win-service-install.ps1
+- cp script/win-service-uninstall.ps1 bin/win/win-service-uninstall.ps1
 - zip -r bin/sleeponlan-x86.zip bin/x86/
 - zip -r bin/sleeponlan-win.zip bin/win/
 - zip -r bin/sleeponlan-arm.zip bin/arm/

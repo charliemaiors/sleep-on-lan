@@ -45,3 +45,20 @@ func InstallService(port string) {
 		logger.Error(err)
 	}
 }
+
+func UninstallService() {
+	srvConf := &service.Config{
+		Name:        "sleeponlan",
+		DisplayName: "Sleep On Lan Service",
+		Description: "Simple sleep on lan service",
+	}
+
+	sleeponlan := &sol{}
+
+	s, err := service.New(sleeponlan, srvConf)
+	s.Stop()
+	err = s.Uninstall()
+	if err != nil {
+		logger.Error(err)
+	}
+}

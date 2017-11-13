@@ -57,7 +57,15 @@ func UninstallService() {
 	sleeponlan := &sol{}
 
 	s, err := service.New(sleeponlan, srvConf)
-	s.Stop()
+	logger, err = s.Logger(nil)
+	if err != nil {
+		panic(err)
+	}
+
+	err = s.Stop()
+	if err != nil {
+		logger.Error(err)
+	}
 	err = s.Uninstall()
 	if err != nil {
 		logger.Error(err)

@@ -19,7 +19,6 @@ script:
 
 before_deploy:
 - zip -r bin/sleeponlan-x86.zip bin/x86/
-- zip -r bin/sleeponlan-osx.zip bin/osx/
 - zip -r bin/sleeponlan-win.zip bin/win/
 - zip -r bin/sleeponlan-arm.zip bin/arm/
 deploy:

@@ -42,8 +42,8 @@ github.com/spf13/viper v0.0.0-20170619124313-c1de95864d73 h1:qJXvCTq/ZNWp7kk3MGb
 github.com/spf13/viper v0.0.0-20170619124313-c1de95864d73/go.mod h1:A8kyI5cUJhb8N+3pkfONlcEcZbueH6nhAm0Fq7SrnBM=
 github.com/stretchr/testify v1.8.4 h1:CcVxjf3Q8PM0mHUKJCdn+eZZtm5yQwehR5yeSVQQcUk=
 github.com/stretchr/testify v1.8.4/go.mod h1:sz/lmYIOXD/1dqDmKjjqLyZ2RngseejIcXlSw2iwfAo=
-golang.org/x/sys v0.0.0-20170703210155-94b76065f2d2 h1:t5pPVtKY5FQGuFxgVhQzf4GN4yt7pMhcjKkJ6NIB5Ec=
-golang.org/x/sys v0.0.0-20170703210155-94b76065f2d2/go.mod h1:STP8DvDyc/dI5b8T5hshtkjS+E42TnysNCUPdjciGhY=
+golang.org/x/sys v0.1.0 h1:kunALQeHf1/185U1i0GOB/fy1IPRDDpuoOOqRReG57U=
+golang.org/x/sys v0.1.0/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/text v0.0.0-20170630100924-2bf8f2a19ec0 h1:M4kywXOhV3F38kTr0IZZYueKhR5dVnpaVmGSeYrklJY=
 golang.org/x/text v0.0.0-20170630100924-2bf8f2a19ec0/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=
 gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c h1:Hei/4ADfdWqJk1ZMxUNpqntNwaWcugrBjAiHlqqRiVk=

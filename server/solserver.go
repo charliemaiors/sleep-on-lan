@@ -10,8 +10,7 @@ import (
 
 	"github.com/spf13/viper"
 
-	ps "github.com/gorillalabs/go-powershell"
-	"github.com/gorillalabs/go-powershell/backend"
+	"github.com/abdfnx/gosh"
 	"github.com/julienschmidt/httprouter"
 )
 
@@ -50,8 +49,8 @@ func StartServer() {
 	http.ListenAndServe(":"+port, router)
 }
 
-func handleCommand(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	command := ps.ByName("command")
+func handleCommand(w http.ResponseWriter, r *http.Request, prms httprouter.Params) {
+	command := prms.ByName("command")
 	fmt.Println("Command is " + command)
 	enc := json.NewEncoder(w)
 	if !stringInSlice(command, options) {
@@ -98,21 +97,16 @@ func shutdownLinux(command string) error {
 }
 
 func shutdownWindows(command string) error {
-	back = &backend.Local{}
-	shell, err := ps.New(back)
-	if err != nil {
-		return err
-	}
 
 	switch command {
 	case "suspend":
-		_, _, err = shell.Execute("rundll32 powrprof.dll,SetSuspendState 0,1,0")
+		_, _, err = gosh.Run("rundll32 powrprof.dll,SetSuspendState 0,1,0")
 	case "poweroff":
-		_, _, err = shell.Execute(baseWindows + " -s")
+		_, _, err = gosh.Run(baseWindows + " -s")
 	case "hibernate":
-		_, _, err = shell.Execute(baseWindows + " -h")
+		_, _, err = gosh.Run(baseWindows + " -h")
 	case "reboot": //Really?
-		_, _, err = shell.Execute(baseWindows + " -r")
+		_, _, err = gosh.Run(baseWindows + " -r")
 	}
 	return err
 }

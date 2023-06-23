@@ -25,7 +25,6 @@ const (
 
 var (
 	shutdownFunc func(command string) error
-	back         *backend.Local
 	options      = []string{"suspend", "poweroff", "hibernate", "reboot"}
 )
 
@@ -100,13 +99,13 @@ func shutdownWindows(command string) error {
 
 	switch command {
 	case "suspend":
-		_, _, err = gosh.Run("rundll32 powrprof.dll,SetSuspendState 0,1,0")
+		gosh.Run("rundll32 powrprof.dll,SetSuspendState 0,1,0")
 	case "poweroff":
-		_, _, err = gosh.Run(baseWindows + " -s")
+		gosh.Run(baseWindows + " -s")
 	case "hibernate":
-		_, _, err = gosh.Run(baseWindows + " -h")
+		gosh.Run(baseWindows + " -h")
 	case "reboot": //Really?
-		_, _, err = gosh.Run(baseWindows + " -r")
+		gosh.Run(baseWindows + " -r")
 	}
-	return err
+	return nil
 }

@@ -6,8 +6,7 @@ branches:
   only:
   - master
   - "/^v\\d+(\\.\\d+)+$/"
-go:
-- 1.20
+go: "1.20"
 
 before_script:
 - mkdir -p bin/x86 bin/osx bin/win bin/arm

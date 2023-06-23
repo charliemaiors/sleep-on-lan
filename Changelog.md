@@ -1,3 +1,3 @@
-# Release 1.0.6
+# Release 1.0.7
 
 * Actions

@@ -36,6 +36,10 @@ jobs:
               goos: darwin
             - goarch: arm64
               goos: windows
+            - goarch: arm64
+              goos: openbsd
+            - goarch: arm64
+              goos: netbsd
     steps:
     - name: Checkout code
       uses: actions/checkout@v2

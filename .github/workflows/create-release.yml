@@ -38,7 +38,9 @@ jobs:
             - goarch: arm64
               goos: windows
     steps:
-    - name: "Upload assets"
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Upload assets
       uses: wangyoucao577/go-release-action@v1
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}

@@ -7,19 +7,9 @@ on:
 name: Create Release
 
 jobs:
-  build:
+  create_release:
     name: Create Release
     runs-on: ubuntu-latest
-    strategy:
-        matrix:
-          # build and publish in parallel: linux/386, linux/amd64, linux/arm64, windows/386, windows/amd64, darwin/amd64, darwin/arm64
-          goos: [linux, windows, darwin]
-          goarch: ["386", amd64, arm64]
-          exclude:
-            - goarch: "386"
-              goos: darwin
-            - goarch: arm64
-              goos: windows
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -34,6 +24,20 @@ jobs:
         body_path: Changelog.md
         draft: false
         prerelease: false
+  update_release:
+    name: Update Release
+    runs-on: ubuntu-latest
+    strategy:
+        matrix:
+          # build and publish in parallel: linux/386, linux/amd64, linux/arm64, windows/386, windows/amd64, darwin/amd64, darwin/arm64
+          goos: [linux, windows, darwin]
+          goarch: ["386", amd64, arm64]
+          exclude:
+            - goarch: "386"
+              goos: darwin
+            - goarch: arm64
+              goos: windows
+    steps:
     - name: "Upload assets"
       uses: wangyoucao577/go-release-action@v1
       with:

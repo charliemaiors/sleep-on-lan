@@ -20,9 +20,6 @@ jobs:
             goos: darwin
           - goarch: arm64
             goos: windows
-  build:
-    name: Create Release
-    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2

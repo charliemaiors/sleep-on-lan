@@ -1,3 +1,3 @@
-# Release 1.0.11
+# Release 1.0.12
 
 * Actions test

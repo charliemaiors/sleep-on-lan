@@ -21,6 +21,8 @@ type Result struct {
 const (
 	baseLinux   = "systemctl"
 	baseWindows = "shutdown -f"
+	baseDarwin  = "shutdown"
+	baseBSD     = "shutdown"
 )
 
 var (
@@ -35,6 +37,16 @@ func init() {
 	case "linux":
 		fmt.Println("###############\nPlease be sure that this script has sudo priviledges in order to run commands from this script\n################")
 		shutdownFunc = shutdownLinux
+	case "darwin":
+		fmt.Println("###############\nPlease be sure that this script has sudo priviledges in order to run commands from this script\n################")
+		shutdownFunc = shutdownDarwin
+	case "freebsd":
+	case "openbsd":
+	case "netbsd":
+	case "dragonfly":
+	case "illumos":
+		fmt.Println("###############\nPlease be sure that this script has sudo priviledges in order to run commands from this script\n################")
+		shutdownFunc = shutdownBSD
 	default:
 		panic("Your os is not yet supported")
 	}
@@ -108,4 +120,34 @@ func shutdownWindows(command string) error {
 		gosh.Run(baseWindows + " -r")
 	}
 	return nil
+}
+
+func shutdownDarwin(command string) error {
+	var commandEx *exec.Cmd
+	switch command {
+	case "suspend":
+		commandEx = exec.Command(baseDarwin, "-s")
+	case "hibernate":
+		return errors.New("Hibernate is not supported on Darwin")
+	case "reboot":
+		commandEx = exec.Command(baseDarwin, "-r now")
+	case "poweroff":
+		commandEx = exec.Command(baseDarwin, "-h now")
+	}
+	return commandEx.Run()
+}
+
+func shutdownBSD(command string) error {
+	var commandEx *exec.Cmd
+	switch command {
+	case "suspend":
+		commandEx = exec.Command(baseBSD, "-s")
+	case "hibernate":
+		return errors.New("Hibernate is not supported on Darwin")
+	case "reboot":
+		commandEx = exec.Command(baseBSD, "-r")
+	case "poweroff":
+		commandEx = exec.Command(baseBSD, "-h")
+	}
+	return commandEx.Run()
 }

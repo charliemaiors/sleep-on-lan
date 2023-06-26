@@ -1,3 +1,4 @@
-# Release 1.0.17
+# Release 1.1.0
 
-* Actions test
+* Support extended for darwin (macos)
+* Support for *BSD systems
